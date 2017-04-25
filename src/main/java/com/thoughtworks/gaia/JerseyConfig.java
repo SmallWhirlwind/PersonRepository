@@ -12,25 +12,27 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class JerseyConfig extends ResourceConfig {
     private static final String[] MODULE_PACKAGES = new String[]{
-        "com.thoughtworks.gaia.product.endpoint",
+            "com.thoughtworks.gaia.product.endpoint",
+            "com.thoughtworks.gaia.tableA.endpoint",
+            "com.thoughtworks.gaia.address.endpoint",
     };
 
     public JerseyConfig() {
         // common packages
         this.packages(
-            "com.thoughtworks.gaia.common.exception.handler"
+                "com.thoughtworks.gaia.common.exception.handler"
         );
 
         // module packages
         this.packages(
-            MODULE_PACKAGES
+                MODULE_PACKAGES
         );
 
         this.registerClasses(
-            ApiListingResource.class,
-            SwaggerSerializers.class,
-            EntityFilteringFeature.class,
-            JacksonFeature.class
+                ApiListingResource.class,
+                SwaggerSerializers.class,
+                EntityFilteringFeature.class,
+                JacksonFeature.class
         );
 
         initSwaggerBeanConfig();

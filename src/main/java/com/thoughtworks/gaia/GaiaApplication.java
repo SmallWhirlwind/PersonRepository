@@ -10,5 +10,6 @@ public class GaiaApplication {
         new SpringApplicationBuilder(GaiaApplication.class)
             .bannerMode(Banner.Mode.OFF)
             .run(args);
+
     }
 }
