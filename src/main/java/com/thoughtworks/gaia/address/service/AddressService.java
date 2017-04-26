@@ -23,7 +23,7 @@ public class AddressService implements Loggable {
     private AddressDao addressDao;
 
     public AddressModel addAddress(Address address) {
-        AddressModel addressModel =mapper.map(address, AddressModel.class);
+        AddressModel addressModel = mapper.map(address, AddressModel.class);
         addressDao.save(addressModel);
 
         if (addressDao.idEquals(addressModel.getId()).querySingle() == null) {
@@ -32,5 +32,35 @@ public class AddressService implements Loggable {
         }
 
         return addressModel;
+    }
+
+    public Address getAddress(Long address_id) {
+        AddressModel addressModel = addressDao.idEquals(address_id).querySingle();
+        if (addressModel == null) {
+            error("TableA not found with id: " + address_id);
+            throw new NotFoundException();
+        }
+
+        return mapper.map(addressModel, Address.class);
+    }
+
+    public Address upDataAddress(Address address) {
+
+        if (addressDao.idEquals(address.getId()).querySingle() == null) {
+            error("TableA not found with id: " + address.getId());
+            throw new NotFoundException();
+        }
+        return mapper.map(addressDao.update(mapper.map(address, AddressModel.class)), Address.class);
+    }
+
+
+    public void deleteAddress(Long address_Id) {
+        AddressModel addressModel = addressDao.idEquals(address_Id).querySingle();
+        if (addressModel == null) {
+            error("Product not found with id: " + address_Id);
+            throw new com.thoughtworks.gaia.common.exception.NotFoundException();
+        }
+
+        addressDao.remove(addressModel);
     }
 }

@@ -9,10 +9,7 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -38,4 +35,39 @@ public class AddressEndPoint {
     public Response addAddress(Address address) {
         return Response.ok().entity(addressService.addAddress(address)).build();
     }
+
+    @Path("/{address_id}")
+    @ApiOperation(value = "Add Address", response = Address.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Add Address successfully"),
+            @ApiResponse(code = 404, message = "No Address matches")
+    })
+    @GET
+    public Response getAddress(@PathParam("address_id") Long address_Id) {
+        return Response.ok().entity(addressService.getAddress(address_Id)).build();
+    }
+
+    @Path("/{address_id}")
+    @ApiOperation(value = "Delete tableA by id", response = Address.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Delete TableA successfully"),
+            @ApiResponse(code = 404, message = "No TableA matches given id")
+    })
+    @DELETE
+    public void deleteTableA(@PathParam("address_id") Long address_Id) {
+        addressService.deleteAddress(address_Id);
+    }
+
+    @Path("/{address_id}")
+    @ApiOperation(value = "upData tableA", response = Address.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "upData TableA successfully"),
+            @ApiResponse(code = 404, message = "No TableA matches")
+    })
+    @PUT
+    public Response upDataTableA(@PathParam("address_id") Long address_Id, Address address) {
+        address.setId(address_Id);
+        return Response.ok().entity(addressService.upDataAddress(address)).build();
+    }
+
 }
