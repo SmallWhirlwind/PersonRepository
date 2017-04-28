@@ -1,6 +1,6 @@
 package com.thoughtworks.gaia.tableA.entity;
 
-import com.thoughtworks.gaia.address.model.AddressModel;
+import com.thoughtworks.gaia.tableA.model.AddressModel;
 
 import java.util.List;
 

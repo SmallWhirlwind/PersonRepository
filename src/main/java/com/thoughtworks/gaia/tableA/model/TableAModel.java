@@ -1,7 +1,5 @@
 package com.thoughtworks.gaia.tableA.model;
 
-import com.thoughtworks.gaia.address.entity.Address;
-import com.thoughtworks.gaia.address.model.AddressModel;
 import com.thoughtworks.gaia.common.jpa.IdBaseModel;
 
 import javax.persistence.Entity;

@@ -1,4 +1,4 @@
-package com.thoughtworks.gaia.address.entity;
+package com.thoughtworks.gaia.tableA.entity;
 
 /**
  * Created by haoyuze on 2017/4/25.

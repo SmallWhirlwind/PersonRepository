@@ -1,7 +1,7 @@
-package com.thoughtworks.gaia.address.endpoint;
+package com.thoughtworks.gaia.tableA.endpoint;
 
-import com.thoughtworks.gaia.address.service.AddressService;
-import com.thoughtworks.gaia.address.entity.Address;
+import com.thoughtworks.gaia.tableA.service.AddressService;
+import com.thoughtworks.gaia.tableA.entity.Address;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

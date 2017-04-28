@@ -1,8 +1,7 @@
-package com.thoughtworks.gaia.address.dao;
+package com.thoughtworks.gaia.tableA.dao;
 
-import com.thoughtworks.gaia.address.model.AddressModel;
+import com.thoughtworks.gaia.tableA.model.AddressModel;
 import com.thoughtworks.gaia.common.jpa.BaseDaoWrapper;
-import com.thoughtworks.gaia.tableA.model.TableAModel;
 import org.springframework.stereotype.Component;
 
 /**

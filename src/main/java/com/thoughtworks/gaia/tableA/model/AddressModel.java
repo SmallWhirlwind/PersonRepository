@@ -1,4 +1,4 @@
-package com.thoughtworks.gaia.address.model;
+package com.thoughtworks.gaia.tableA.model;
 
 import com.thoughtworks.gaia.common.jpa.IdBaseModel;
 

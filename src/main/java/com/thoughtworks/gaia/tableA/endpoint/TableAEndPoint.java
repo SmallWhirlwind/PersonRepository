@@ -1,6 +1,6 @@
 package com.thoughtworks.gaia.tableA.endpoint;
 
-import com.thoughtworks.gaia.address.entity.Address;
+import com.thoughtworks.gaia.tableA.entity.Address;
 import com.thoughtworks.gaia.tableA.entity.TableA;
 import com.thoughtworks.gaia.tableA.service.TableAService;
 import io.swagger.annotations.Api;
@@ -10,7 +10,6 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.Null;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -72,9 +71,9 @@ public class TableAEndPoint {
             @ApiResponse(code = 404, message = "No TableA matches")
     })
     @DELETE
-    public void deleteTableA(@PathParam("tableA_id") Long tableAId,@PathParam("address_id") Long addressId) {
+    public void deleteTableA(@PathParam("tableA_id") Long tableAId, @PathParam("address_id") Long addressId) {
         Address address = tableAService.getAddressFromTableA(tableAId, addressId);
-        if(address == null){
+        if (address == null) {
             throw new NotFoundException();
         }
         tableAService.deleteAddress(addressId);
@@ -100,8 +99,7 @@ public class TableAEndPoint {
     @POST
     public Response addAddressFromTableA(@PathParam("tableA_id") Long tableA_Id, Address address) {
 
-        tableAService.addAddressFromTableA(tableA_Id, address);
-        return Response.ok().entity(address).build();
+        return Response.ok().entity(tableAService.addAddressFromTableA(tableA_Id, address)).build();
     }
 
     @Path("/{tableA_id}")
@@ -123,7 +121,7 @@ public class TableAEndPoint {
             @ApiResponse(code = 404, message = "No TableA matches")
     })
     @PUT
-    public Response upDataAddress(@PathParam("table_id") Long tableAId,@PathParam("address_id") Long addressId, Address address) {
+    public Response upDataAddress(@PathParam("table_id") Long tableAId, @PathParam("address_id") Long addressId, Address address) {
         address.setId(addressId);
         address.setAid(tableAId);
         return Response.ok().entity(tableAService.upDataAddress(address)).build();

@@ -1,8 +1,8 @@
 package com.thoughtworks.gaia.tableA.service;
 
-import com.thoughtworks.gaia.address.dao.AddressDao;
-import com.thoughtworks.gaia.address.entity.Address;
-import com.thoughtworks.gaia.address.model.AddressModel;
+import com.thoughtworks.gaia.tableA.dao.AddressDao;
+import com.thoughtworks.gaia.tableA.entity.Address;
+import com.thoughtworks.gaia.tableA.model.AddressModel;
 import com.thoughtworks.gaia.common.Loggable;
 import com.thoughtworks.gaia.common.exception.NotFoundException;
 import com.thoughtworks.gaia.tableA.TableAMapper;
@@ -28,6 +28,8 @@ public class TableAService implements Loggable {
     @Autowired
     private AddressDao addressDao;
 
+    
+
     public TableA getTableA(Long tableA_Id) {
         TableAModel tableAModel = tableADao.idEquals(tableA_Id).querySingle();
         if (tableAModel == null) {
@@ -38,11 +40,13 @@ public class TableAService implements Loggable {
         return mapper.map(tableAModel, TableA.class);
     }
 
-    public Address getAddressFromTableA(Long tableA_Id,Long address_Id){
+    public Address getAddressFromTableA(Long tableA_Id, Long address_Id) {
         TableAModel tableAModel = tableADao.idEquals(tableA_Id).querySingle();
-        for (AddressModel temp:tableAModel.getAddressList()){
-            if(temp.getId().equals(address_Id)){
-                return mapper.map(temp, Address.class);
+        if(tableAModel.getAddressList()!=null) {
+            for (AddressModel temp : tableAModel.getAddressList()) {
+                if (temp.getId().equals(address_Id)) {
+                    return mapper.map(temp, Address.class);
+                }
             }
         }
         throw new NotFoundException();
@@ -79,7 +83,7 @@ public class TableAService implements Loggable {
         return tableAModel;
     }
 
-    public AddressModel addAddressFromTableA(Long tableA_Id,Address address){
+    public AddressModel addAddressFromTableA(Long tableA_Id, Address address) {
         TableAModel tableAModel = tableADao.idEquals(tableA_Id).querySingle();
         if (tableAModel == null) {
             error("TableA not found with id: " + tableA_Id);
@@ -89,6 +93,10 @@ public class TableAService implements Loggable {
         AddressModel addressModel = mapper.map(address, AddressModel.class);
         addressDao.save(addressModel);
 
+        if (addressDao.idEquals(addressModel.getId()).querySingle() == null) {
+            error("TableA not found with id: " + addressModel.getId());
+            throw new NotFoundException();
+        }
         return addressModel;
     }
 

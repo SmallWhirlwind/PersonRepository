@@ -1,4 +1,4 @@
-package com.thoughtworks.gaia.address;
+package com.thoughtworks.gaia.tableA;
 
 import com.thoughtworks.gaia.common.MapperBase;
 import org.springframework.stereotype.Component;
